@@ -1,0 +1,42 @@
+{
+  "name": "loopback-filter",
+  "version": "0.1.0",
+  "description": "Apply LoopBack filters to Arrays",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "jscs": "^1.13.1",
+    "jshint": "^2.8.0",
+    "mocha": "^2.2.5",
+    "should": "^6.0.3"
+  },
+  "scripts": {
+    "pretest": "jscs . && jshint .",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strongloop/loopback-filter.git"
+  },
+  "keywords": [
+    "LoopBack",
+    "filter",
+    "sort",
+    "sorting",
+    "query"
+  ],
+  "author": "Ritchie Martori",
+  "license": {
+    "name": "Dual MIT/StrongLoop",
+    "url": "https://github.com/strongloop/loopback/blob/master/LICENSE"
+  },
+  "bugs": {
+    "url": "https://github.com/strongloop/loopback-filter/issues"
+  },
+  "homepage": "https://github.com/strongloop/loopback-filter"
+}
