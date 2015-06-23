@@ -1,11 +1,11 @@
-# loopback-filter
+# loopback-filters
 
 This module implements LoopBack style filtering.
 
 ## Install
 
 ```sh
-$ npm install loopback-filter
+$ npm install loopback-filters
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ Below is a basic example using the module
 ```js
 var data = [{foo: 'bar'}, {bat: 'baz'}, {foo: 'bar'}];
 var filter = {where: {foo: 'bar'}};
-var filtered = require('loopback-filter')(data, filter);
+var filtered = require('loopback-filters')(data, filter);
 console.log(filtered);
 ```
 
