@@ -31,10 +31,7 @@
     "query"
   ],
   "author": "Ritchie Martori",
-  "license": {
-    "name": "Dual MIT/StrongLoop",
-    "url": "https://github.com/strongloop/loopback/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/strongloop/loopback-filters/issues"
   },
