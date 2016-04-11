@@ -135,12 +135,11 @@ function test(example, value) {
     }
 
     if ('between' in example) {
-      return (testInEquality({ gte:example.between[0] }, value) &&
-               testInEquality({ lte:example.between[1] }, value));
+      return (testInEquality({ gte: example.between[0] }, value) &&
+        testInEquality({ lte: example.between[1] }, value));
     }
 
     if (example.like || example.nlike) {
-
       var like = example.like || example.nlike;
       if (typeof like === 'string') {
         like = toRegExp(like);

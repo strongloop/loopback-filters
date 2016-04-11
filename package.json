@@ -16,8 +16,8 @@
     "should": "^6.0.3"
   },
   "scripts": {
+    "lint": "eslint .",      
     "test": "mocha",
-    "lint": "eslint .",
     "posttest": "npm run lint"    
   },
   "repository": {
