@@ -1,3 +1,21 @@
+2016-05-06, Version 0.1.2
+=========================
+
+ * update copyright notices and license (Ryan Graham)
+
+ * Fix linting errors (Amir Jafarian)
+
+ * Auto-update by eslint --fix (Amir Jafarian)
+
+ * Add eslint infrastructure (Amir Jafarian)
+
+ * Refer to licenses with a link (Sam Roberts)
+
+ * Use strongloop conventions for licensing (Sam Roberts)
+
+ * Improve readme with details about features (Ritchie Martori)
+
+
 2015-06-23, Version 0.1.1
 =========================
 
