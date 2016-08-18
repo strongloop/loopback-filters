@@ -10,8 +10,8 @@
     "debug": "^2.2.0"
   },
   "devDependencies": {
-    "eslint": "^2.7.0",
-    "eslint-config-loopback": "^1.0.0",
+    "eslint": "^2.13.1",
+    "eslint-config-loopback": "^4.0.0",
     "mocha": "^2.2.5",
     "should": "^6.0.3"
   },
