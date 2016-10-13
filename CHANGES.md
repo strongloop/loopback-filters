@@ -1,3 +1,9 @@
+2016-10-13, Version 0.1.3
+=========================
+
+ * update eslint infrastructure (Amir Jafarian)
+
+
 2016-05-06, Version 0.1.2
 =========================
 
