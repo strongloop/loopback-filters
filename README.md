@@ -38,7 +38,18 @@ The output would be:
 applyFilter({
   where: {
     // the price > 10 && price < 100
-    and: [{id: {gt:10}}, {id:{lt:100}}],
+    and: [
+      {
+        price: {
+          gt: 10
+        }
+      },
+      {
+        price: {
+          lt: 100
+        }
+      },
+    ],
 
     // match Mens Shoes and Womens Shoes and any other type of Shoe
     category: {like: '.* Shoes'},
