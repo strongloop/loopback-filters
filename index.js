@@ -275,14 +275,13 @@ function normalizeOrder(filter) {
 
   orders.forEach(function(key, i) {
     var reverse = 1;
-    console.log(key);
     var m = key.match(/\s+(A|DE)SC$/i);
     if (m) {
       key = key.replace(/\s+(A|DE)SC/i, '');
       if (m[1].toLowerCase() === 'de') reverse = -1;
     } else {
       var Ctor = SyntaxError || Error;
-      throw new Ctor('filter.order must includ ASC of DESC');
+      throw new Ctor('filter.order must include ASC or DESC');
     }
     orders[i] = {'key': key, 'reverse': reverse};
   });
