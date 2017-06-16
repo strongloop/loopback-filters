@@ -281,7 +281,7 @@ function normalizeOrder(filter) {
       if (m[1].toLowerCase() === 'de') reverse = -1;
     } else {
       var Ctor = SyntaxError || Error;
-      throw new Ctor('filter.order must includ ASC of DESC');
+      throw new Ctor('filter.order must include ASC or DESC');
     }
     orders[i] = {'key': key, 'reverse': reverse};
   });
