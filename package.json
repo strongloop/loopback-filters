@@ -18,6 +18,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "mocha",
+    "test:watch": "mocha --watch",
     "posttest": "npm run lint"
   },
   "repository": {
