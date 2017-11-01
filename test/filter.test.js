@@ -54,6 +54,13 @@ describe('filter', function() {
       done();
     });
   });
+  it('should allow to find using regexp', function(done) {
+    applyFilter({where: {name: {regexp: /John/}}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 1);
+      done();
+    });
+  });
 
   it('should allow to find using an \'or\' filter ', function(done) {
     var orFilter = [
@@ -67,8 +74,26 @@ describe('filter', function() {
     });
   });
 
+  it('should allow to find using nin', function(done) {
+    applyFilter({where: {name: {nin: ['George Harrison']}}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 5);
+      done();
+    });
+  });
   // input validation
   describe.skip('invalid input', function() {
+    it(
+      'should throw if the regexp value is not string or regexp',
+      function(done) {
+        applyFilter({where: {name: {regexp: 123}}}, function(err, users) {
+          should.exist(err);
+          should.equal(err.message, 'Invalid regular expression passed to regexp query.');
+          done();
+        });
+      }
+    );
+
     it(
       'should throw if the like value is not string or regexp',
       function(done) {
