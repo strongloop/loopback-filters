@@ -43,6 +43,30 @@ describe('filter', function() {
     });
   });
 
+  it('should allow to find using an \'and\' filter ', function(done) {
+    var andFilter = [
+      {vip: true},
+      {role: 'lead'},
+    ];
+    applyFilter({where: {and: andFilter}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 2);
+      done();
+    });
+  });
+
+  it('should allow to find using an \'or\' filter ', function(done) {
+    var orFilter = [
+      {name: 'John Lennon'},
+      {name: 'Paul McCartney'},
+    ];
+    applyFilter({where: {or: orFilter}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 2);
+      done();
+    });
+  });
+
   // input validation
   describe.skip('invalid input', function() {
     it(
