@@ -3,6 +3,9 @@
   "version": "0.1.3",
   "description": "Apply LoopBack filters to Arrays",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "directories": {
     "test": "test"
   },
