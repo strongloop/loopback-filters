@@ -151,10 +151,10 @@ describe('filter', function() {
 
   it('should successfully extract 0 user from the db', function(done) {
     applyFilter({where: {birthday: {between: [new Date(1990, 0), Date.now()]}}},
-              function(err, users) {
-                should(users.length).be.equal(0);
-                done();
-              });
+      function(err, users) {
+        should(users.length).be.equal(0);
+        done();
+      });
   });
 
   it('should support order with multiple fields', function(done) {
@@ -167,15 +167,15 @@ describe('filter', function() {
   });
 
   it('should sort undefined values to the end when ordered DESC',
-  function(done) {
-    applyFilter({order: 'vip ASC, order DESC'}, function(err, users) {
-      should.not.exist(err);
+    function(done) {
+      applyFilter({order: 'vip ASC, order DESC'}, function(err, users) {
+        should.not.exist(err);
 
-      users[4].seq.should.be.eql(1);
-      users[5].seq.should.be.eql(0);
-      done();
+        users[4].seq.should.be.eql(1);
+        users[5].seq.should.be.eql(0);
+        done();
+      });
     });
-  });
 
   it('should throw if order has wrong direction', function(done) {
     applyFilter({order: 'seq ABC'}, function(err, users) {
