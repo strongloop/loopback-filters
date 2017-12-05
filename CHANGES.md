@@ -1,3 +1,37 @@
+2017-12-05, Version 1.0.0
+=========================
+
+ * Upgrade deps + fix linting issues (Miroslav Bajtoš)
+
+ * Drop support for legacy Node.js versions (0.x) (Miroslav Bajtoš)
+
+ * chore: update license (Diana Lau)
+
+ * Add npm script to start tests in watch mode (Bram Borggreve)
+
+ * Add tests for 'and' and 'or' filters (Bram Borggreve)
+
+ * Create Issue and PR Templates (#19) (Sakib Hasan)
+
+ * Add CODEOWNER file (Diana Lau)
+
+ * Corrected a typo in the filter.order error message (Hannu Kärkkäinen)
+
+ * Removed unnecessary logging (Hannu Kärkkäinen)
+
+ * Update where filter in readme (#15) (Sakib Hasan)
+
+ * Add travis CI (#16) (Sakib Hasan)
+
+ * Replicate new issue_template from loopback (Siddhi Pai)
+
+ * Replicate issue_template from loopback repo (Siddhi Pai)
+
+ * Update paid support URL (Siddhi Pai)
+
+ * Fix ESLint errors for CI (Siddhi Pai)
+
+
 2016-10-13, Version 0.1.3
 =========================
 
