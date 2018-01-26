@@ -6,7 +6,12 @@
 var debug = require('debug')('loopback:filter');
 var geo = require('./lib/geo');
 
-module.exports = function filterNodes(nodes, filter) {
+module.exports = {
+  filterNodes: filterNodes,
+  applyFilter: applyFilter,
+};
+
+function filterNodes(nodes, filter) {
   if (filter) {
     debug('filter %j', filter);
     // do we need some sorting?
@@ -71,8 +76,38 @@ function matchesFilter(obj, filter) {
         }
       }
     }
-    if (!test(where[key], getValue(obj, key))) {
+    var value = getValue(obj, key);
+    // Support referencesMany and other embedded relations
+    // Also support array types. Mongo, possibly PostgreSQL
+    if (Array.isArray(value)) {
+      var matcher = where[key];
+      // The following condition is for the case where we are querying with
+      // a neq filter, and when the value is an empty array ([]).
+      if (matcher.neq !== undefined && value.length <= 0) {
+        return true;
+      }
+      return value.some(function(v, i) {
+        var filter = {where: {}};
+        filter.where[i] = matcher;
+        return applyFilter(filter)(value);
+      });
+    }
+    if (!test(where[key], value)) {
       pass = false;
+    }
+    // If we have a composed key a.b and b would resolve to a property of an object inside an array
+    // then, we attempt to emulate mongo db matching. Helps for embedded relations
+    var dotIndex = key.indexOf('.');
+    var subValue = obj[key.substring(0, dotIndex)];
+    if (dotIndex !== -1) {
+      var subFilter = {where: {}};
+      var subKey = key.substring(dotIndex + 1);
+      subFilter.where[subKey] = where[key];
+      if (Array.isArray(subValue)) {
+        return subValue.some(applyFilter(subFilter));
+      } else if (typeof subValue === 'object' && subValue !== null) {
+        return applyFilter(subFilter)(subValue);
+      }
     }
   });
   return pass;
@@ -157,15 +192,7 @@ function test(example, value) {
     }
 
     if (example.regexp) {
-      var regexp;
-      if (example.regexp instanceof RegExp) {
-        regexp = example.regexp;
-      } else if (typeof example.regexp === 'string') {
-        regexp = toRegExp(example.regexp);
-      } else {
-        throw new TypeError('Invalid regular expression passed to regexp query.');
-      }
-      return regexp.test(value);
+      return value ? value.match(RegExp(example.regexp)) : false;
     }
 
     if (example.like || example.nlike) {
