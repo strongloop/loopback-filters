@@ -3,13 +3,11 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 'use strict';
-var debug = require('debug')('loopback:filter');
-var geo = require('./lib/geo');
+const debug = require('debug')('loopback:filter');
+const geo = require('./lib/geo');
 
-module.exports = {
-  filterNodes: filterNodes,
-  applyFilter: applyFilter,
-};
+module.exports = filterNodes;
+filterNodes.applyFilter = applyFilter;
 
 function filterNodes(nodes, filter) {
   if (filter) {
@@ -19,7 +17,7 @@ function filterNodes(nodes, filter) {
       nodes = nodes.sort(sorting.bind(normalizeOrder(filter)));
     }
 
-    var nearFilter = geo.nearFilter(filter.where);
+    const nearFilter = geo.nearFilter(filter.where);
 
     // geo sorting
     if (nearFilter) {
@@ -37,8 +35,8 @@ function filterNodes(nodes, filter) {
     }
 
     // limit/skip
-    var skip = filter.skip || filter.offset || 0;
-    var limit = filter.limit || nodes.length;
+    const skip = filter.skip || filter.offset || 0;
+    const limit = filter.limit || nodes.length;
     nodes = nodes.slice(skip, skip + limit);
   }
 
@@ -46,7 +44,7 @@ function filterNodes(nodes, filter) {
 };
 
 function applyFilter(filter) {
-  var where = filter.where;
+  const where = filter.where;
   if (typeof where === 'function') {
     return where;
   }
@@ -56,9 +54,9 @@ function applyFilter(filter) {
 }
 
 function matchesFilter(obj, filter) {
-  var where = filter.where;
+  const where = filter.where;
   var pass = true;
-  var keys = Object.keys(where);
+  const keys = Object.keys(where);
   keys.forEach(function(key) {
     if (key === 'and' || key === 'or') {
       if (Array.isArray(where[key])) {
@@ -76,18 +74,18 @@ function matchesFilter(obj, filter) {
         }
       }
     }
-    var value = getValue(obj, key);
+    const value = getValue(obj, key);
     // Support referencesMany and other embedded relations
     // Also support array types. Mongo, possibly PostgreSQL
     if (Array.isArray(value)) {
-      var matcher = where[key];
+      const matcher = where[key];
       // The following condition is for the case where we are querying with
       // a neq filter, and when the value is an empty array ([]).
       if (matcher.neq !== undefined && value.length <= 0) {
         return true;
       }
       return value.some(function(v, i) {
-        var filter = {where: {}};
+        const filter = {where: {}};
         filter.where[i] = matcher;
         return applyFilter(filter)(value);
       });
@@ -97,11 +95,11 @@ function matchesFilter(obj, filter) {
     }
     // If we have a composed key a.b and b would resolve to a property of an object inside an array
     // then, we attempt to emulate mongo db matching. Helps for embedded relations
-    var dotIndex = key.indexOf('.');
-    var subValue = obj[key.substring(0, dotIndex)];
+    const dotIndex = key.indexOf('.');
+    const subValue = obj[key.substring(0, dotIndex)];
     if (dotIndex !== -1) {
-      var subFilter = {where: {}};
-      var subKey = key.substring(dotIndex + 1);
+      const subFilter = {where: {}};
+      const subKey = key.substring(dotIndex + 1);
       subFilter.where[subKey] = where[key];
       if (Array.isArray(subValue)) {
         return subValue.some(applyFilter(subFilter));
@@ -192,7 +190,15 @@ function test(example, value) {
     }
 
     if (example.regexp) {
-      return value ? value.match(RegExp(example.regexp)) : false;
+      var regexp;
+      if (example.regexp instanceof RegExp) {
+        regexp = example.regexp;
+      } else if (typeof example.regexp === 'string') {
+        regexp = toRegExp(example.regexp);
+      } else {
+        throw new TypeError('Invalid regular expression passed to regexp query.');
+      }
+      return value ? value.match(regexp) : false;
     }
 
     if (example.like || example.nlike) {
@@ -240,7 +246,7 @@ function compare(val1, val2) {
     return val1 - val2;
   }
   if (val1 instanceof Date) {
-    var result = val1 - val2;
+    const result = val1 - val2;
     return result;
   }
   // Return NaN if we don't know how to compare
@@ -267,7 +273,7 @@ function getValue(obj, path) {
   if (obj == null) {
     return undefined;
   }
-  var keys = path.split('.');
+  const keys = path.split('.');
   var val = obj;
   for (var i = 0, n = keys.length; i < n; i++) {
     val = val[keys[i]];
@@ -281,7 +287,7 @@ function getValue(obj, path) {
 function selectFields(fields) {
   // map function
   return function(obj) {
-    var result = {};
+    const result = {};
     var key;
 
     for (var i = 0; i < fields.length; i++) {
@@ -297,8 +303,8 @@ function sorting(a, b) {
   var undefinedA, undefinedB;
 
   for (var i = 0, l = this.length; i < l; i++) {
-    var aVal = getValue(a, this[i].key);
-    var bVal = getValue(b, this[i].key);
+    const aVal = getValue(a, this[i].key);
+    const bVal = getValue(b, this[i].key);
     undefinedB = bVal === undefined && aVal !== undefined;
     undefinedA = aVal === undefined && bVal !== undefined;
 
@@ -326,12 +332,12 @@ function normalizeOrder(filter) {
 
   orders.forEach(function(key, i) {
     var reverse = 1;
-    var m = key.match(/\s+(A|DE)SC$/i);
+    const m = key.match(/\s+(A|DE)SC$/i);
     if (m) {
       key = key.replace(/\s+(A|DE)SC/i, '');
       if (m[1].toLowerCase() === 'de') reverse = -1;
     } else {
-      var Ctor = SyntaxError || Error;
+      const Ctor = SyntaxError || Error;
       throw new Ctor('filter.order must include ASC or DESC');
     }
     orders[i] = {'key': key, 'reverse': reverse};

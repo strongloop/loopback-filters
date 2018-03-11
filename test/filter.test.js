@@ -3,9 +3,9 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 'use strict';
-var assert = require('assert');
-var should = require('should');
-var filter = require('../');
+const assert = require('assert');
+const should = require('should');
+const filter = require('../');
 var users;
 
 describe('filter', function() {
@@ -44,7 +44,7 @@ describe('filter', function() {
   });
 
   it('should allow to find using an \'and\' filter ', function(done) {
-    var andFilter = [
+    const andFilter = [
       {vip: true},
       {role: 'lead'},
     ];
@@ -63,7 +63,7 @@ describe('filter', function() {
   });
 
   it('should allow to find using an \'or\' filter ', function(done) {
-    var orFilter = [
+    const orFilter = [
       {name: 'John Lennon'},
       {name: 'Paul McCartney'},
     ];
