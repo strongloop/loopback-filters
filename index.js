@@ -119,6 +119,10 @@ function test(example, value) {
     return undefined;
   }
 
+  if (Array.isArray(value) && typeof example === 'string' ) {
+    return value.indexOf(example) !== -1
+  }
+
   if (typeof example === 'object' && example !== null) {
     // ignore geo near filter
     if (example.near) {
