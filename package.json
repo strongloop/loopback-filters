@@ -35,7 +35,7 @@
     "sorting",
     "query"
   ],
-  "author": "Ritchie Martori",
+  "author": "IBM Corp.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/strongloop/loopback-filters/issues"
