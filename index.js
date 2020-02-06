@@ -175,11 +175,11 @@ function test(example, value) {
         like = toRegExp(like);
       }
       if (example.like) {
-        return new RegExp(like).test(value);
+        return new RegExp(like, example.options).test(value);
       }
 
       if (example.nlike) {
-        return !new RegExp(like).test(value);
+        return !new RegExp(like, example.options).test(value);
       }
     }
 

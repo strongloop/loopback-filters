@@ -20,6 +20,14 @@ describe('filter', function() {
     });
   });
 
+  it('should allow to find using like with options', function(done) {
+    applyFilter({where: {name: {like: '%St%', options: 'i'}}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 3);
+      done();
+    });
+  });
+
   it('should support like for no match', function(done) {
     applyFilter({where: {name: {like: 'M%XY'}}}, function(err, users) {
       should.not.exist(err);
@@ -32,6 +40,14 @@ describe('filter', function() {
     applyFilter({where: {name: {nlike: '%St%'}}}, function(err, users) {
       should.not.exist(err);
       users.should.have.property('length', 4);
+      done();
+    });
+  });
+
+  it('should allow to find using nlike with options', function(done) {
+    applyFilter({where: {name: {nlike: '%St%', options: 'i'}}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 3);
       done();
     });
   });
