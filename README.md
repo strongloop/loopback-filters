@@ -1,5 +1,16 @@
 # loopback-filters
 
+**⚠️ LoopBack 3 is in Maintenance LTS mode, only critical bugs and critical
+security fixes will be provided. (See
+[Module Long Term Support Policy](#module-long-term-support-policy) below.)**
+
+We urge all LoopBack 3 users to migrate their applications to LoopBack 4 as
+soon as possible. Refer to our
+[Migration Guide](https://loopback.io/doc/en/lb4/migration-overview.html)
+for more information on how to upgrade.
+
+## Overview
+
 This module implements LoopBack style filtering **without any dependencies on
 LoopBack**.
 
@@ -92,3 +103,15 @@ Include or exclude a set of fields in the result.
 ## Docs
 
 [See the LoopBack docs](http://docs.strongloop.com/display/public/LB/Querying+data) for the filter syntax.
+
+## Module Long Term Support Policy
+
+This module adopts the [
+Module Long Term Support (LTS)](http://github.com/CloudNativeJS/ModuleLTS) policy,
+ with the following End Of Life (EOL) dates:
+
+| Version | Status          | Published | EOL      |
+| ------- | --------------- | --------- | -------- |
+| 1.x     | Maintenance LTS | Dec 2017  | Dec 2020 |
+
+Learn more about our LTS plan in [docs](https://loopback.io/doc/en/contrib/Long-term-support.html).
