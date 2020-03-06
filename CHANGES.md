@@ -1,3 +1,27 @@
+2020-03-06, Version 1.1.0
+=========================
+
+ * Update LTS status in README (Miroslav Bajtoš)
+
+ * chore: update copyrights year (Diana Lau)
+
+ * Implement insensitive filtering (Jee Mok)
+
+ * chore: improve issue and PR templates (Nora)
+
+ * chore: exclude "good first issues" from stalebot (Miroslav Bajtoš)
+
+ * chore: update CODEOWNERS (Diana Lau)
+
+ * chore: add stalebot (Diana Lau)
+
+ * update eslint dependency (Nora)
+
+ * chore: update copyrights years (Agnes Lin)
+
+ * Implement regexp and nin filtering (Y.Shing)
+
+
 2017-12-05, Version 1.0.0
 =========================
 
