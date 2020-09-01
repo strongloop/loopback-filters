@@ -116,6 +116,7 @@ function test(example, value) {
   if (typeof value === 'string' && (example instanceof RegExp)) {
     return value.match(example);
   }
+
   if (example === undefined) {
     return undefined;
   }
@@ -127,7 +128,12 @@ function test(example, value) {
     }
 
     if (example.inq) {
-      // if (!value) return false;
+      if (Array.isArray(value)) {
+        return example.inq.every(function(v) {
+          return value.indexOf(v) !== -1;
+        });
+      }
+
       for (var i = 0; i < example.inq.length; i++) {
         if (example.inq[i] == value) {
           return true;
@@ -140,6 +146,13 @@ function test(example, value) {
       if (!Array.isArray(example.nin))
         throw TypeError('Invalid nin query, you must pass an array to nin query.');
       if (example.nin.length === 0) return true; // not in [] should be always true;
+
+      if (Array.isArray(value)) {
+        return example.nin.some(function(v) {
+          return value.indexOf(v) === -1;
+        });
+      }
+
       for (var j = 0; j < example.nin.length; j++) {
         if (example.nin[j] == value) {
           return false;

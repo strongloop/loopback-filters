@@ -91,6 +91,14 @@ describe('filter', function() {
     });
   });
 
+  it('should allow to find using inq - array property', function(done) {
+    applyFilter({where: {topics: {inq: ['game', 'dance']}}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 2);
+      done();
+    });
+  });
+
   it('should allow to find using nin', function(done) {
     applyFilter({where: {name: {nin: ['George Harrison']}}}, function(err, users) {
       should.not.exist(err);
@@ -98,6 +106,15 @@ describe('filter', function() {
       done();
     });
   });
+
+  it('should allow to find using nin - array property', function(done) {
+    applyFilter({where: {topics: {nin: ['music']}}}, function(err, users) {
+      should.not.exist(err);
+      users.should.have.property('length', 5);
+      done();
+    });
+  });
+
   // input validation
   describe.skip('invalid input', function() {
     it(
@@ -324,6 +341,7 @@ function seed() {
         state: 'CA',
         zipCode: '95131',
       },
+      topics: ['game', 'music', 'sport', 'dance'],
     },
     {
       seq: 1,
@@ -339,8 +357,9 @@ function seed() {
         state: 'CA',
         zipCode: '94065',
       },
+      topics: ['game', 'dance'],
     },
-    {seq: 2, name: 'George Harrison', order: 5, vip: false},
+    {seq: 2, name: 'George Harrison', order: 5, vip: false, topics: ['sport']},
     {seq: 3, name: 'Ringo Starr', order: 6, vip: false},
     {seq: 4, name: 'Pete Best', order: 4},
     {seq: 5, name: 'Stuart Sutcliffe', order: 3, vip: true},
