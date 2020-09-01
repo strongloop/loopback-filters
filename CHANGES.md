@@ -1,3 +1,9 @@
+2020-09-01, Version 1.1.1
+=========================
+
+ * fix: filter correctly array property (Matteo Padovano)
+
+
 2020-03-06, Version 1.1.0
 =========================
 
