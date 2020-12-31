@@ -1,7 +1,8 @@
 # loopback-filters
 
-**⚠️ LoopBack 3 is in Maintenance LTS mode, only critical bugs and critical
-security fixes will be provided. (See
+**⚠️ LoopBack 3 has reached end of life. We are no longer accepting pull requests or providing 
+support for community users. The only exception is fixes for critical bugs and security 
+vulnerabilities provided as part of support for IBM API Connect customers. (See
 [Module Long Term Support Policy](#module-long-term-support-policy) below.)**
 
 We urge all LoopBack 3 users to migrate their applications to LoopBack 4 as
@@ -112,6 +113,6 @@ Module Long Term Support (LTS)](http://github.com/CloudNativeJS/ModuleLTS) polic
 
 | Version | Status          | Published | EOL      |
 | ------- | --------------- | --------- | -------- |
-| 1.x     | Maintenance LTS | Dec 2017  | Dec 2020 |
+| 1.x     | End-of-Life     | Dec 2017  | Dec 2020 |
 
 Learn more about our LTS plan in [docs](https://loopback.io/doc/en/contrib/Long-term-support.html).
